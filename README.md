@@ -46,8 +46,7 @@
 تابع getCameraName() یک تابع خواندنی است که نام دوربین را به عنوان یک رشته برمی‌گرداند. برای این کار از تابع داخلی Solidity view استفاده شده است که به عنوان یک تابع خواندنی شناخته می‌شود و از شبکه بلاکچین هزینه گاز نمی‌گیرد.
 
 کد این تابع به صورت زیر است:
-```function getCameraName() public view returns (string memory) {
-return cameraName;}```
+```function getCameraName() public view returns (string memory) {return cameraName;}```
 
 تابع getCameraName() فقط یک رشته را به عنوان خروجی برمی‌گرداند، بنابراین هزینه گاز برای اجرای آن کم است. تابع view همچنین اجازه می‌دهد که این تابع از داخل تراکنش‌های دیگر صدا زده شود، به شرطی که هیچ تغییری در حالت قرارداد ایجاد نکند.
 
