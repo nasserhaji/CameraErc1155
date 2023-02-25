@@ -2,9 +2,9 @@
 کنترل هوشمند دوربین نظارتی با قراردادهوشمند با استفاده از استاندارد ERC1155
 این قرارداد هوشمند برای کنترل یک دوربین نظارتی ساخته شده است. صاحب دوربین با استفاده از توابع این قرارداد، می‌تواند دوربین را روشن و خاموش کرده و زمان روشن و خاموش شدن آن را ثبت کند. همچنین، این قرارداد از استاندارد ERC1155 استفاده کرده و توکن‌های مربوط به زمان‌های روشن و خاموش شدن دوربین را ایجاد می‌کند که می‌تواند به صاحب دوربین انتقال داده شود. به این ترتیب، این قرارداد هوشمند می‌تواند به عنوان یک ابزار کنترلی برای دوربین نظارتی در سیستم‌های امنیتی و ارائه خدمات مرتبط استفاده شود.
 در این قرارداد هوشمند، ما 15 تابع داریم که در زیر لیست شده‌اند:
-constructor(address _cameraOwner, string memory _cameraName) public
-function setCameraOwner(address _newOwner) public onlyOwner
-function getCameraOwner() public view returns (address)
+* constructor(address _cameraOwner, string memory _cameraName) public
+* function setCameraOwner(address _newOwner) public onlyOwner
+* function getCameraOwner() public view returns (address)
 function getCameraName() public view returns (string memory)
 function turnOn() public onlyOwner
 function turnOff() public onlyOwner
