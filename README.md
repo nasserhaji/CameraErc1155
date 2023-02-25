@@ -1,28 +1,27 @@
-# camera-with-smart-contract-using-erc1155
-کنترل هوشمند دوربین نظارتی با قراردادهوشمند با استفاده از استاندارد ERC1155
+# کنترل هوشمند دوربین نظارتی با قراردادهوشمند با استفاده از استاندارد ERC1155
 این قرارداد هوشمند برای کنترل یک دوربین نظارتی ساخته شده است. صاحب دوربین با استفاده از توابع این قرارداد، می‌تواند دوربین را روشن و خاموش کرده و زمان روشن و خاموش شدن آن را ثبت کند. همچنین، این قرارداد از استاندارد ERC1155 استفاده کرده و توکن‌های مربوط به زمان‌های روشن و خاموش شدن دوربین را ایجاد می‌کند که می‌تواند به صاحب دوربین انتقال داده شود. به این ترتیب، این قرارداد هوشمند می‌تواند به عنوان یک ابزار کنترلی برای دوربین نظارتی در سیستم‌های امنیتی و ارائه خدمات مرتبط استفاده شود.
 در این قرارداد هوشمند، ما 15 تابع داریم که در زیر لیست شده‌اند:
-* constructor(address _cameraOwner, string memory _cameraName) public
-* function setCameraOwner(address _newOwner) public onlyOwner
-* function getCameraOwner() public view returns (address)
-function getCameraName() public view returns (string memory)
-function turnOn() public onlyOwner
-function turnOff() public onlyOwner
-function getLastOnTime() public view returns (uint256)
-function getLastOffTime() public view returns (uint256)
-function getTokenURI(uint256 tokenId) public view override returns (string memory)
-function supportsInterface(bytes4 interfaceId) public view virtual override returns (bool)
-function _beforeTokenTransfer(address from, address to, uint256 tokenId) internal virtual override(ERC1155, ERC1155Receiver)
-function _onTokenTransfer(address operator, address from, uint256 id, uint256 value, bytes calldata data) internal virtual override(ERC1155Receiver)
-function _onTokenBatchTransfer(address operator, address from, uint256[] memory ids, uint256[] memory values, bytes memory data) internal virtual override(ERC1155Receiver)
-function withdraw() public onlyOwner
-receive() external payable
+1. constructor(address _cameraOwner, string memory _cameraName) public
+2. function setCameraOwner(address _newOwner) public onlyOwner
+3. function getCameraOwner() public view returns (address)
+4. function getCameraName() public view returns (string memory)
+5. function turnOn() public onlyOwner
+6. function turnOff() public onlyOwner
+7. function getLastOnTime() public view returns (uint256)
+8. function getLastOffTime() public view returns (uint256)
+9. function getTokenURI(uint256 tokenId) public view override returns (string memory)
+10. function supportsInterface(bytes4 interfaceId) public view virtual override returns (bool)
+11. function _beforeTokenTransfer(address from, address to, uint256 tokenId) internal virtual override(ERC1155, ERC1155Receiver)
+12. function _onTokenTransfer(address operator, address from, uint256 id, uint256 value, bytes calldata data) internal virtual override(ERC1155Receiver)
+13. function _onTokenBatchTransfer(address operator, address from, uint256[] memory ids, uint256[] memory values, bytes memory data) internal virtual override(ERC1155Receiver)
+14. function withdraw() public onlyOwner
+15. receive() external payable
 
 
-بررسی توابع:
+## بررسی توابع:
 
 
-constructor(address _cameraOwner, string memory _cameraName) public
+```solidity constructor(address _cameraOwner, string memory _cameraName) public```
 
 این تابع constructor یکی از توابع اصلی در یک قرارداد هوشمند Solidity است که وظیفه‌ی آن ایجاد و مقداردهی اولیه به متغیرهای قرارداد را دارد.
 
