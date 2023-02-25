@@ -21,7 +21,7 @@
 ## بررسی توابع:
 
 
-```solidity constructor(address _cameraOwner, string memory _cameraName) public```
+```solidity constructor(address _cameraOwner, string memory _cameraName) public ```
 
 این تابع constructor یکی از توابع اصلی در یک قرارداد هوشمند Solidity است که وظیفه‌ی آن ایجاد و مقداردهی اولیه به متغیرهای قرارداد را دارد.
 
