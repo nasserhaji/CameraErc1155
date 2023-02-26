@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Camera Control Panel</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Replace with your deployed contract address
+            var contractAddress = "0x1234567890123456789012345678901234567890";
+            // Replace with your deployed contract ABI
+            var contractAbi = [{"inputs":[],"name":"getLastOnTime","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}];
+            // Replace with the Ethereum account that owns the contract
+            var account = "0x1234567890123456789012345678901234567890";
+
+            // Web3.js initialization
+            var web3 = new Web3(window.ethereum);
+            window.ethereum.enable().then(function() {
+                var contract = new web3.eth.Contract(contractAbi, contractAddress, { from: account });
+                $("#getLastOnTimeButton").click(function() {
+                    contract.methods.getLastOnTime().call().then(function(result) {
+                        $("#lastOnTime").text(result);
+                    });
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>Camera Control Panel</h1>
+    <button id="getLastOnTimeButton">Get Last On Time</button>
+    <p>Last On Time: <span id="lastOnTime"></span></p>
+</body>
+</html>
