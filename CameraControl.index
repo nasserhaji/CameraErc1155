@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Camera Control</title>
+  </head>
+  <body>
+    <h1>Camera Control</h1>
+    <form>
+      <label for="camera-name">Camera Name:</label>
+      <input type="text" id="camera-name" name="camera-name" required /><br />
+      <label for="camera-url">Camera URL:</label>
+      <input type="text" id="camera-url" name="camera-url" required /><br />
+      <label for="on-time">On Time:</label>
+      <input type="datetime-local" id="on-time" name="on-time" required /><br />
+      <label for="off-time">Off Time:</label>
+      <input type="datetime-local" id="off-time" name="off-time" required /><br />
+      <button type="button" onclick="turnOnCamera()">Turn On Camera</button>
+      <button type="button" onclick="turnOffCamera()">Turn Off Camera</button>
+    </form>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./web3.min.js"></script>
+    <script>
+      const contractAddress = "0x1234567890123456789012345678901234567890";
+      const contractABI = [
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "_cameraOwner",
+              "type": "address"
+            },
+            {
+              "internalType": "string",
+              "name": "_name",
+              "type": "string"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "constructor"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "_newOwner",
+              "type": "address"
+            }
+          ],
+          "name": "setCameraOwner",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "getCameraOwner",
+          "outputs": [
+            {
+              "internalType": "address",
+              "name": "",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "getCameraName",
+          "outputs": [
+            {
+              "internalType": "string",
+              "name": "",
+              "type": "string"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "turnOn",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "turnOff",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        
+            {
+      "inputs": [],
+      "name": "getLastOnTime",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ];
+
+  const web3 = new Web3(Web3.givenProvider || "ws://localhost:8545");
+  const cameraContract = new web3.eth.Contract(contractABI, contractAddress);
+
+  async function turnOnCamera() {
+    const cameraName = document.getElementById("camera-name").value;
+    const cameraUrl = document.getElementById("camera-url").value;
+    const onTime = Date.parse(document.getElementById("on-time").value);
+    const offTime = Date.parse(document.getElementById("off-time").value);
+    const accounts = await ethereum.request({ method: "eth_requestAccounts" });
+    const account = accounts[0];
+    const cameraOwner = await cameraContract.methods.getCameraOwner().call();
+    if (account !== cameraOwner) {
+      alert("You are not the owner of this camera.");
+      return;
+    }
+    try {
+      await cameraContract.methods.turnOn().send({ from: account });
+      await axios.post(cameraUrl, { command: "on" });
+      alert("Camera is turned on.");
+    } catch (error) {
+      console.error(error);
+      alert("Failed to turn on camera.");
+    }
+  }
+  async function turnOffCamera() {
+    const cameraName = document.getElementById("camera-name").value;
+    const cameraUrl = document.getElementById("camera-url").value;
+    const onTime = Date.parse(document.getElementById("on-time").value);
+    const offTime = Date.parse(document.getElementById("off-time").value);
+    const accounts = await ethereum.request({ method: "eth_requestAccounts" });
+    const account = accounts[0];
+    const cameraOwner = await cameraContract.methods.getCameraOwner().call();
+    if (account !== cameraOwner) {
+      alert("You are not the owner of this camera.");
+      return;
+    }
+    try {
+      await cameraContract.methods.turnOff().send({ from: account });
+      await axios.post(cameraUrl, { command: "off" });
+      alert("Camera is turned off.");
+    } catch (error) {
+      console.error(error);
+      alert("Failed to turn off camera.");
+    }
+  }
+
+  async function getLastOnTime() {
+    const lastOnTime = await cameraContract.methods.getLastOnTime().call();
+    const date = new Date(lastOnTime * 1000);
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    const hours = date.getHours();
+    const minutes = "0" + date.getMinutes();
+    const seconds = "0" + date.getSeconds();
+    const formattedTime =
+      year +
+      "-" +
+      month +
+      "-" +
+      day +
+      " " +
+      hours +
+      ":" +
+      minutes.substr(-2) +
+      ":" +
+      seconds.substr(-2);
+    alert("Last time camera was turned on: " + formattedTime);
+  }
+</script>
