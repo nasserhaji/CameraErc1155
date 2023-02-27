@@ -3,8 +3,8 @@
 لیست تغییرات برای پروژه دوربین هوشمند به صورت زیر می‌تواند باشد:
 
 ## نگارش 1.0.0
-افزودن صفحه وب Camera Control برای کنترل دوربین هوشمند
-پیاده‌سازی قرارداد هوشمند CameraContract برای مدیریت دوربین ها
+افزودن صفحه وب Camera Control * برای کنترل دوربین هوشمند
+پیاده‌سازی قرارداد هوشمند CameraContract * برای مدیریت دوربین ها
 تعریف توابع setCameraOwner، getCameraOwner، getCameraName، turnOn و turnOff در قرارداد هوشمند
 افزودن توابع setCameraName و getLastOnTime به قرارداد هوشمند
 به روزرسانی رابط کاربری Camera Control برای اضافه کردن توابع setCameraName و getLastOnTime
