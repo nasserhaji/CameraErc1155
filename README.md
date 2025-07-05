@@ -217,3 +217,13 @@ data: داده اضافی انتقال.
 ```receive() external payable```
 
 تابع receive() external payable در واقع یک fallback function است که وقتی یک کاربر برای این قرارداد اتر ارسال می‌کند ولی تابعی برای دریافت اتر در قرارداد وجود ندارد، فراخوانی می‌شود. در این صورت، هیچ پارامتری به تابع منتقل نمی‌شود و پولی که ارسال شده، به حساب owner قرارداد واریز می‌شود. با اضافه کردن این fallback function به قرارداد، امکان ارسال اتر بدون استفاده از توابع withdraw قرارداد وجود دارد.
+## 📜 License
+
+This project is licensed under a **Custom NonCommercial Attribution License**.
+
+- ✅ Free to use, modify, and share for **non-commercial** and **educational** purposes
+- ❌ **Commercial use, resale, or monetization** is strictly prohibited without prior written consent
+- 📛 Attribution required: Developed by Mohammad Nasser Haji Hashemabad (https://mohammadnasser.com)
+
+📬 For commercial licensing or inquiries: [info@mohammadnasser.com](mailto:info@mohammadnasser.com)
+
